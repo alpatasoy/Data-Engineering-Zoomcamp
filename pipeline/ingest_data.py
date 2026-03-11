@@ -39,11 +39,12 @@ parse_dates = [
 @click.option('--port', default=5432, type=int, help='PostgreSQL port')
 @click.option('--db', default='ny_taxi', help='PostgreSQL database name')
 @click.option('--table', default='yellow_taxi_data', help='Target table name')
+@click.option('--chunksize', default=100000, type=int, help='Number of records per chunk')
 
 
 
 
-def run(user, password, host, port, db, table):
+def run(user, password, host, port, db, table, chunksize):
     year = 2021
     month = 1
     pg_user = user
@@ -51,7 +52,7 @@ def run(user, password, host, port, db, table):
     pg_host = host
     pg_port = port
     pg_db = db
-    chunksize = 10
+    chunksize = chunksize
     table_name = table
 
     prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
@@ -60,12 +61,11 @@ def run(user, password, host, port, db, table):
     engine = create_engine(f'postgresql://{pg_user}:{pg_password}@{pg_host}:{pg_port}/{pg_db}')
     
     df_iter = pd.read_csv(
-        url,
-        nrows=100,
-        dtype=dtype,
-        parse_dates=parse_dates,
-        iterator= True, # activating the iterator
-        chunksize = chunksize # records per batch
+    prefix + 'yellow_tripdata_2021-01.csv.gz',
+    dtype=dtype,
+    parse_dates=parse_dates,
+    iterator=True,
+    chunksize=chunksize
     )
 
     first= True

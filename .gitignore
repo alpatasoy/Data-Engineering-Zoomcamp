@@ -207,3 +207,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Additional ignores for data engineering projects
+*.csv
+*.json
+*.txt
+.env_encoded

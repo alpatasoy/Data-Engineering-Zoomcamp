@@ -28,4 +28,5 @@ docker run -it \
   --host="pgdatabase" \
   --port=5432 \
   --db="ny_taxi" \
+  --chunksize=100000 \
   --table="yellow_taxi_data"
