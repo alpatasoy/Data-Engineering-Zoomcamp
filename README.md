@@ -1,4 +1,4 @@
-# Data-Engineering-Zoomcamp
-Data Engineering Zoomcamp notes, assignments, projects
+# Data-Engineering-Applications
+Data Engineering Bootcamp notes, assignments, projects
 
 Salutes,
